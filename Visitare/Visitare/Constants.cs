@@ -7,7 +7,7 @@
 		// OAuth
 		// For Google login, configure at https://console.developers.google.com/
 		public static string iOSClientId = "<insert IOS client ID here>";
-		public static string AndroidClientId = "812446294615-9ohs10ad5uhu4lc04ovhoesfj1jnlff7.apps.googleusercontent.com";
+		public static string AndroidClientId = "812446294615-083mtv1i26u0ounav75j7r6f7734q0k2.apps.googleusercontent.com";
 
 		// These values do not need changing
 		public static string Scope = "https://www.googleapis.com/auth/userinfo.email";
@@ -17,6 +17,6 @@
 
 		// Set these to reversed iOS/Android client ids, with :/oauth2redirect appended
 		public static string iOSRedirectUrl = "<insert IOS redirect URL here>:/oauth2redirect";
-		public static string AndroidRedirectUrl = "com.googleusercontent.apps.812446294615-9ohs10ad5uhu4lc04ovhoesfj1jnlff7:/oauth2redirect";
+		public static string AndroidRedirectUrl = "com.googleusercontent.apps.812446294615-083mtv1i26u0ounav75j7r6f7734q0k2:/oauth2redirect";
 	}
 }

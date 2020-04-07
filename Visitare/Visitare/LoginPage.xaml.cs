@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Visitare.Models;
 using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Visitare
 {
-    [Obsolete]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
@@ -27,13 +28,32 @@ namespace Visitare
 
         private async void OnLog(object sender, EventArgs e)
         {
-            Navigation.InsertPageBefore(new MainPage(), this);
-            await Navigation.PopAsync();
-        }
+            var uri = new Uri(string.Format("http://10.0.2.2:50939/api/Account/Register", string.Empty));
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+            var client = new HttpClient();
+            var model = new RegisterModel
+            {
+                
+            };
 
-        private async void OnRegister(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new RegisterPage());
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine("Jest OK!");
+                Navigation.InsertPageBefore(new MainPage(), this);
+                await Navigation.PopAsync();
+                await DisplayAlert("Sukces", "Rejestracja zakończona sukcesem", "OK");
+            }
+            else
+            {
+                Debug.WriteLine(response);
+                await DisplayAlert("Błąd", "Spróbuj ponownie", "OK");
+            }
         }
 
         private void OnGoogleClicked(object sender, EventArgs e)
@@ -106,6 +126,7 @@ namespace Visitare
 
                 await store.SaveAsync(account = e.Account, Constants.AppName);
 
+                Debug.WriteLine(user.Picture);
                 Navigation.InsertPageBefore(new MainPage(), this);
                 await Navigation.PopAsync();
             }
@@ -120,6 +141,11 @@ namespace Visitare
             }
 
             Debug.WriteLine("Authentication error: " + e.Message);
+        }
+
+        private async void Register(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
         }
     }
 }

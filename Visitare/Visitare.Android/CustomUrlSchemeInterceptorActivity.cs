@@ -10,7 +10,7 @@ namespace Visitare.Droid
 	[IntentFilter(
 		new[] { Intent.ActionView },
 		Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
-		DataSchemes = new[] { "com.googleusercontent.apps.812446294615-9ohs10ad5uhu4lc04ovhoesfj1jnlff7" },
+		DataSchemes = new[] { "com.googleusercontent.apps.812446294615-083mtv1i26u0ounav75j7r6f7734q0k2" },
 		DataPath = "/oauth2redirect")]
 	public class CustomUrlSchemeInterceptorActivity : Activity
 	{
