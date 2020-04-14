@@ -16,24 +16,34 @@
                      Aspect="Fill" Clicked="OnProfileClicked" />
             <Entry Placeholder="Szukaj" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="20"/>
             <Button Text="Wyloguj" BackgroundColor="#439299" FontAttributes="Bold" HorizontalOptions="End"
-                Clicked="OnLogOut" CornerRadius="18" HeightRequest="10" TextColor="Black"/>
+                Clicked="OnLogOut" CornerRadius="18" TextColor="Black"/>
         </StackLayout>
-        <maps:Map x:Name="maps" Margin="8" IsShowingUser="true" MapClicked="OnMapClicked">
-            <x:Arguments>
-                <maps:MapSpan>
-                    <x:Arguments>
-                        <maps:Position>
-                            <x:Arguments>
-                                <x:Double>53.010281 </x:Double>
-                                <x:Double>18.604922</x:Double>
-                            </x:Arguments>
-                        </maps:Position>
-                        <x:Double>0.05</x:Double>
-                        <x:Double>0.05</x:Double>
-                    </x:Arguments>
-                </maps:MapSpan>
-            </x:Arguments>
-        </maps:Map>
+        <StackLayout HeightRequest="400">
+            <maps:Map x:Name="maps" Margin="2" IsShowingUser="true" MapClicked="OnMapClicked">
+                <x:Arguments>
+                    <maps:MapSpan>
+                        <x:Arguments>
+                            <maps:Position>
+                                <x:Arguments>
+                                    <x:Double>53.010281</x:Double>
+                                    <x:Double>18.604922</x:Double>
+                                </x:Arguments>
+                            </maps:Position>
+                            <x:Double>0.05</x:Double>
+                            <x:Double>0.05</x:Double>
+                        </x:Arguments>
+                    </maps:MapSpan>
+                </x:Arguments>
+            </maps:Map>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start" Spacing="15" Margin="5">
+            <Button Text="Wyczyść" BackgroundColor="#be8feb" FontAttributes="Bold" HorizontalOptions="End"
+                Clicked="OnClearClicked" CornerRadius="25" TextColor="Black"/>
+            <Button Text="Nowa Trasa" BackgroundColor="#be8feb" FontAttributes="Bold" HorizontalOptions="EndAndExpand"
+                Clicked="OnNewRoutesClicked" CornerRadius="25" TextColor="Black"/>
+            <Button Text="Trasy" BackgroundColor="#be8feb" FontAttributes="Bold" HorizontalOptions="EndAndExpand"
+                Clicked="OnRoutesClicked" CornerRadius="25" TextColor="Black"/>
+        </StackLayout>
     </StackLayout>
     
     

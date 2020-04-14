@@ -22,7 +22,7 @@ namespace Visitare
 
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            var uri = new Uri(string.Format("http://10.0.2.2:50939/api/Account/Register", string.Empty));
+            var uri = new Uri(string.Format("http://dearjean.ddns.net:44301/api/Account/Register", string.Empty));
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
             var client = new HttpClient();

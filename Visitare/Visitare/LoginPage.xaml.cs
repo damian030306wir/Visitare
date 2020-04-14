@@ -28,31 +28,33 @@ namespace Visitare
 
         private async void OnLog(object sender, EventArgs e)
         {
-            var uri = new Uri(string.Format("http://10.0.2.2:50939/api/Account/Register", string.Empty));
-            var handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
-            var client = new HttpClient();
-            var model = new RegisterModel
+            await Navigation.PushAsync(new MainPage());
+            var uri = new Uri(string.Format("http://dearjean.ddns.net:44301/api/Account/Register", string.Empty));
+            var keyValues = new List<KeyValuePair<string, string>>
             {
-                
+                new KeyValuePair<string, string>("Username", login.Text),
+                new KeyValuePair<string, string>("Password", password.Text),
+                new KeyValuePair<string, string>("grant_type", "password")
             };
 
-            var json = JsonConvert.SerializeObject(model);
+            var request = new HttpRequestMessage(
+                HttpMethod.Post, "http://dearjean.ddns.net:44301/Token");
+            request.Content = new FormUrlEncodedContent(keyValues);
 
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            var client = new HttpClient();
+            var response = await client.SendAsync(request);
 
-            var response = await client.PostAsync(uri, content);
+            var content = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
                 Debug.WriteLine("Jest OK!");
                 Navigation.InsertPageBefore(new MainPage(), this);
                 await Navigation.PopAsync();
-                await DisplayAlert("Sukces", "Rejestracja zakończona sukcesem", "OK");
             }
             else
             {
-                Debug.WriteLine(response);
-                await DisplayAlert("Błąd", "Spróbuj ponownie", "OK");
+                Debug.WriteLine(content);
+                await DisplayAlert("Błędne dane", "Spróbuj ponownie", "OK");
             }
         }
 

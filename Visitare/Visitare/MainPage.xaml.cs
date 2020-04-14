@@ -29,7 +29,6 @@ namespace Visitare
         {
             await Navigation.PushAsync(new ProfilePage());
         }
-
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
             Pin pin = new Pin
@@ -51,6 +50,22 @@ namespace Visitare
             }
             maps.Pins.Add(pin);
             maps.MapElements.Add(polyline);
+        }
+        private void OnClearClicked(object sender, EventArgs e)
+        {
+            maps.Pins.Clear();
+            maps.MapElements.Clear();
+            positions.Clear();
+        }
+
+        private async void OnRoutesClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RoutesPage());
+        }
+
+        private void OnNewRoutesClicked(object sender, EventArgs e)
+        {
+
         }
     }
 }
